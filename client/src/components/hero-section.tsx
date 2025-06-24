@@ -12,8 +12,6 @@ function HeroSection() {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setInView(true);
-                } else {
-                    setInView(false);
                 }
             },
             { threshold: 0.8 }
@@ -26,16 +24,16 @@ function HeroSection() {
     }, []);
 
     return (
-        <section className='text-center'>
+        <section className='text-center pt-32 md:pt-44 p-2'>
             <h1 className='text-5xl font-bold md:text-6xl lg:text-7xl xl:text-8xl gradient-title '>
                 Your AI Career Coach for <br /> Professional Success
             </h1>
-            <p className='text-muted-foreground md:text-xl max-w-[600px] mx-auto'>Advance your career with personalized guidance,interview prep and AI-powered tools for job success</p>
+            <p className='text-muted-foreground text-lg md:text-xl max-w-[600px] mx-auto'>Advance your career with personalized guidance,interview prep and AI-powered tools for job success</p>
             <div className='flex flex-row gap-2 justify-center my-4'>
                 <Button size={'lg'}>Get Started</Button>
                 <Button variant="outline" size={'lg'}>Watch Demo</Button>
             </div>
-            <div ref={imageRef} className='flex flex-row justify-center perspective-1000 my-12'>
+            <div ref={imageRef} className='flex flex-row justify-center perspective-1000 md:my-12'>
                 <Image
                     src="/banner.jpeg"
                     alt="header_image"
