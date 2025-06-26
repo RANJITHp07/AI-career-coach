@@ -7,7 +7,7 @@ function Feedback() {
     return (
         <div className='bg-muted/50 py-24 p-2'>
             <h2 className='text-3xl font-bold tracking-tighter text-center mb-2'>What Our User Say</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-7xl mt-7 md:mt-12 lg:mt-16'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-7xl mt-7 md:mt-12 lg:mt-16 max-w-[1200px]'>
                 {
                     testimonial.map((item, index) => {
                         return (

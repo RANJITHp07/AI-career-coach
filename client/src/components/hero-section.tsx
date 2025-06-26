@@ -24,7 +24,7 @@ function HeroSection() {
     }, []);
 
     return (
-        <section className='text-center pt-32 md:pt-44 p-2'>
+        <section className='text-center pt-32 md:pt-44 p-2 container'>
             <h1 className='text-5xl font-bold md:text-6xl lg:text-7xl xl:text-8xl gradient-title '>
                 Your AI Career Coach for <br /> Professional Success
             </h1>
@@ -37,7 +37,7 @@ function HeroSection() {
                 <Image
                     src="/banner.jpeg"
                     alt="header_image"
-                    width={1200}
+                    width={1000}
                     height={720}
                     className={`${inView ? 'rotate-x-0' : 'rotate-x-15'} transition-transform duration-700 ease-out`}
                 />

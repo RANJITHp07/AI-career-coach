@@ -129,6 +129,10 @@
     @apply bg-gradient-to-b from-gray-400 via-gray-200 to-gray-600;
   }
 
+  .container {
+    @apply max-w-[1200px] mx-auto
+  }
+
   .rotate-x-15 {
     transform: rotateX(15deg);
   }
@@ -140,6 +144,7 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+
 }
 
 .grid-background {

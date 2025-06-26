@@ -4,7 +4,7 @@ import { features } from '@/lib/constant/features'
 
 function Features() {
     return (
-        <div className='text-center p-2'>
+        <div className='text-center p-2 container'>
 
             <h2 className='text-3xl font-bold tracking-tighter text-center  md:mb-12'>Powerful features for your career growth</h2>
 
