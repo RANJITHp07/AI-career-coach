@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent } from './ui/card'
 import { features } from '@/lib/constant/features'
 
 function Features() {

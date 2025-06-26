@@ -7,12 +7,15 @@ import {
     SignedOut,
     UserButton,
 } from '@clerk/nextjs'
+import Link from 'next/link'
 
 function Header() {
     return (
         <nav className=' p-2 mb-36 fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60'>
             <div className='flex flex-row items-center justify-between container'>
-                <Image src="/logo.png" width={200} height={60} alt='logo' className="object-contain" />
+                <Link href={'/'} className='cursor-pointer'>
+                    <Image src="/logo.png" width={200} height={60} alt='logo' className="object-contain" />
+                </Link>
 
                 <SignedOut>
                     <SignUpButton>
