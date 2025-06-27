@@ -1,5 +1,5 @@
 export const industryInsightPrompt = (industry: string) => {
-    return `
+  return `
   Analyze the current state of the ${industry} industry and respond strictly in the following JSON format:
   
   {
@@ -22,3 +22,28 @@ export const industryInsightPrompt = (industry: string) => {
   - Do not include any extra commentary or formatting — only return the JSON.
   `;
 };
+
+
+export const skillQuizPrompt = (industry: string, skills: string[]) => {
+  return `Generate 10 technical multiple - choice interview questions for a professional in the ${industry} industry${skills?.length ? `, with expertise in ${skills.join(", ")}` : ""}.
+
+  Each question must include:
+  - A clear and concise question
+    - Four answer options
+      - The correct answer
+        - A brief explanation of the correct answer
+  
+  Return the response ** only ** in the following JSON format with no additional text:
+
+  {
+    "questions": [
+      {
+        "question": "string",
+        "options": ["string", "string", "string", "string"],
+        "correctAnswer": "string",
+        "explanation": "string"
+      }
+    ]
+  }`
+
+}
