@@ -13,6 +13,7 @@ export class QuizController {
 
     async createQuiz(req: Request, res: Response, next: NextFunction) {
         try {
+            console.log("hiiii")
             const userId = req.query.userId as string
             const quiz = await this.quizService.create(userId)
             res.status(200).json(successResponse("Quiz fetched successfully", quiz))
