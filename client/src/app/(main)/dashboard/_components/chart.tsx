@@ -1,5 +1,6 @@
 'use client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { TIndustryInsight } from '@/types/industryInsight';
 import React from 'react';
 import {
     BarChart,
@@ -22,7 +23,20 @@ const data = [
     { name: 'Page G', min: 55, median: 110, max: 180 },
 ];
 
-function Chart() {
+
+type Props = {
+    salaryRanges: TIndustryInsight["salaryRanges"];
+}
+
+function Chart({ salaryRanges }: Props) {
+    const data = salaryRanges.map((range) => ({
+        ...range,
+        min: Math.floor(range.min / 1000),
+        max: Math.floor(range.max / 1000),
+        median: Math.floor(range.median / 1000),
+    }));
+
+    console.log(data)
     return (
         <Card className='bg-transparent my-12'>
             <CardHeader>
@@ -33,14 +47,19 @@ function Chart() {
             </CardHeader>
             <CardContent>
 
-                <div className='h-[400px]'>
+                <div className='min-w-[700px] h-[400px]'>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
                             data={data}
                             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
+                            <XAxis dataKey="role"
+                                interval={0}
+                                angle={0}
+                                textAnchor="middle"
+                                height={80}
+                                tick={{ width: 100 }} />
                             <YAxis domain={[0, 180]} />
                             <Tooltip />
                             <Legend />

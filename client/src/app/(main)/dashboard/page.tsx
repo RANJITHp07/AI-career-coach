@@ -4,17 +4,41 @@ import Insights from './_components/insights'
 import Chart from './_components/chart'
 import Trends from './_components/trends'
 import RecommendedSkills from './_components/recommended_skills'
+import { serverFetch } from '@/lib/fetcher'
 
-function Dashboard() {
+async function Dashboard() {
+    const data = await serverFetch('/api/industry/insight', { queryParams: { industry: "software engineer" } });
+    let industryInsight = {
+        salaryRanges: [
+            {
+                role: "",
+                min: 0,
+                max: 0,
+                median: 0,
+                location: ""
+            }
+        ],
+        growthRate: 0,
+        demandLevel: "",
+        topSkills: [],
+        marketOutlook: "",
+        keyTrends: [],
+        recommendedSkills: []
+    }
+
+    if (data.success) {
+        industryInsight = data.data
+    }
+
     return (
         <div className='py-24 p-2'>
             <h2 className='text-6xl font-bold gradient-title'>Industry Insights</h2>
             <Badge variant={'outline'} className='p-2'>Last updated: 20/10/2025</Badge>
-            <Insights />
-            <Chart />
+            <Insights industryInsight={industryInsight} />
+            <Chart salaryRanges={industryInsight.salaryRanges} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Trends />
-                <RecommendedSkills />
+                <Trends trends={industryInsight.keyTrends} />
+                <RecommendedSkills recommendedSkills={industryInsight.recommendedSkills} />
             </div>
 
         </div>

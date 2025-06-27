@@ -1,9 +1,13 @@
 import React from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { TIndustryInsight } from '@/types/industryInsight'
 
+type Props = {
+    recommendedSkills: TIndustryInsight["recommendedSkills"]
+}
 
-function RecommendedSkills() {
+function RecommendedSkills({ recommendedSkills }: Props) {
     return (
         <Card className='bg-transparent'>
             <CardHeader>
@@ -14,9 +18,11 @@ function RecommendedSkills() {
             </CardHeader>
             <CardContent>
                 <div className='flex flex-wrap gap-2'>
-                    <Badge variant={'outline'}>Python</Badge>
-                    <Badge variant={'outline'}>Javascript</Badge>
-                    <Badge variant={'outline'}>C++</Badge>
+                    {
+                        recommendedSkills.map((skill) => {
+                            return <Badge key={skill} variant={'outline'}>{skill}</Badge>
+                        })
+                    }
                 </div>
             </CardContent>
         </Card>

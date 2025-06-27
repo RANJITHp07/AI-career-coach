@@ -1,7 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { TIndustryInsight } from '@/types/industryInsight'
 import React from 'react'
 
-function Trends() {
+type Props = {
+    trends: TIndustryInsight['keyTrends']
+}
+
+function Trends({ trends }: Props) {
     return (
         <Card className='bg-transparent'>
             <CardHeader>
@@ -12,10 +17,11 @@ function Trends() {
             </CardHeader>
             <CardContent>
                 <ul className="list-disc pl-5 space-y-2 text-sm ">
-                    <li>First key point goes here</li>
-                    <li>Second important detail</li>
-                    <li>Another point worth mentioning</li>
-                    <li>Final note or summary</li>
+                    {
+                        trends.map((trend) => {
+                            return <li key={trend}>{trend}</li>
+                        })
+                    }
                 </ul>
             </CardContent>
         </Card>
