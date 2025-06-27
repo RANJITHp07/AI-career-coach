@@ -14,7 +14,7 @@ export class IndustryController {
         try {
             const industry = req.query.industry as string
             const industryInsight = await this.industryService.industryInsight(industry)
-            res.status(200).json(successResponse("User created successfully", industryInsight))
+            res.status(200).json(successResponse("Industry insight data fetched successfully", industryInsight))
         } catch (error) {
             next()
         }
