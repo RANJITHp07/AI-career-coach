@@ -29,6 +29,9 @@
       "@core/validators": [
         "../packages/validator/src"
       ],
+      "@core/utils": [
+        "../packages/utils/src"
+      ],
     }
   },
   "include": [

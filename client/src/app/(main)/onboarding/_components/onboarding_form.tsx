@@ -25,17 +25,33 @@ import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { industries } from '@/lib/constant/industries'
 import { OnBoardingSchema } from "@core/validators"
+import { useUser } from '@clerk/nextjs'
+import { serverFetch } from '@/lib/fetcher'
+import { apis } from '@/lib/constant/api'
+import { useRouter } from 'next/navigation'
 
 
 function OnboardingForm() {
+    const { user } = useUser();
+    const router = useRouter()
     const form = useForm<z.infer<typeof OnBoardingSchema>>({
         resolver: zodResolver(OnBoardingSchema),
     })
 
     const selectedIndustry = form.watch("industry");
 
-    function onSubmit(data: z.infer<typeof OnBoardingSchema>) {
-        console.log(data)
+    async function onSubmit(data: z.infer<typeof OnBoardingSchema>) {
+        const res = await serverFetch(apis.profile, {
+            body: {
+                clerkUserId: user?.id,
+                ...data
+            },
+            method: 'PUT',
+        });
+
+        if (res.success) {
+            router.push('/dashboard')
+        }
     }
 
     useEffect(() => {

@@ -171,3 +171,9 @@
   height: 100%;
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.9));
 }
+
+.profile-icon {
+  background-image: url('/profile.jpg');
+  background-size: cover;
+  background-position: center;
+}
