@@ -47,3 +47,44 @@ export const skillQuizPrompt = (industry: string, skills: string[]) => {
   }`
 
 }
+
+
+export type WrongAnswer = {
+  question: string
+  answer: string
+  userAnswer: string
+}
+
+export function generateImprovementPrompt(
+  wrongAnswers: WrongAnswer[],
+  industry: string
+) {
+  if (!wrongAnswers.length || !industry) {
+    return "";
+  }
+
+  const wrongQuestionsText = wrongAnswers
+    .map(
+      (q) =>
+        `Question: "${q.question}"\nCorrect Answer: "${q.answer}"\nUser Answer: "${q.userAnswer}"`
+    )
+    .join("\n\n");
+
+  const prompt = `
+The user got the following ${industry} technical interview questions wrong:
+
+${wrongQuestionsText}
+
+Based on these mistakes, provide a concise, specific improvement tip.
+Focus on the knowledge gaps revealed by these wrong answers.
+Keep the response under 2 sentences and make it encouraging.
+
+  Return the response ** only ** in the following JSON format with no additional text:
+{
+  "improveTip": "your tip here"
+}
+`.trim();
+
+  return prompt;
+}
+
