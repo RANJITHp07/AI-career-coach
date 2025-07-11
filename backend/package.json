@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js",
-    "dev": "npx ts-node-dev --project tsconfig.json -r tsconfig-paths/register src/app.ts"
+    "dev": "npx ts-node-dev --project tsconfig.json -r tsconfig-paths/register src/app.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
