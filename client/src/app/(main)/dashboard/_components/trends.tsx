@@ -18,7 +18,7 @@ function Trends({ trends }: Props) {
             <CardContent>
                 <ul className="list-disc pl-5 space-y-2 text-sm ">
                     {
-                        trends.map((trend) => {
+                        trends?.map((trend) => {
                             return <li key={trend}>{trend}</li>
                         })
                     }

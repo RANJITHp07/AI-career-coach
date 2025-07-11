@@ -13,30 +13,18 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-    { name: 'Page A', min: 60, median: 100, max: 150 },
-    { name: 'Page B', min: 45, median: 90, max: 120 },
-    { name: 'Page C', min: 30, median: 80, max: 160 },
-    { name: 'Page D', min: 50, median: 85, max: 140 },
-    { name: 'Page E', min: 40, median: 95, max: 170 },
-    { name: 'Page F', min: 35, median: 88, max: 130 },
-    { name: 'Page G', min: 55, median: 110, max: 180 },
-];
-
-
 type Props = {
     salaryRanges: TIndustryInsight["salaryRanges"];
 }
 
 function Chart({ salaryRanges }: Props) {
-    const data = salaryRanges.map((range) => ({
+    const data = salaryRanges?.map((range) => ({
         ...range,
         min: Math.floor(range.min / 1000),
         max: Math.floor(range.max / 1000),
         median: Math.floor(range.median / 1000),
     }));
 
-    console.log(data)
     return (
         <Card className='bg-transparent my-12'>
             <CardHeader>

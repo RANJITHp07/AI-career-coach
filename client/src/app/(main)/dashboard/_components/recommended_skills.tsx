@@ -19,7 +19,7 @@ function RecommendedSkills({ recommendedSkills }: Props) {
             <CardContent>
                 <div className='flex flex-wrap gap-2'>
                     {
-                        recommendedSkills.map((skill) => {
+                        recommendedSkills?.map((skill) => {
                             return <Badge key={skill} variant={'outline'}>{skill}</Badge>
                         })
                     }

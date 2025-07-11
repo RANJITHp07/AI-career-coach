@@ -5,9 +5,12 @@ import Chart from './_components/chart'
 import Trends from './_components/trends'
 import RecommendedSkills from './_components/recommended_skills'
 import { serverFetch } from '@/lib/fetcher'
+import { auth } from '@clerk/nextjs/server'
+import { formatDateToDDMMYYYY } from '@core/utils'
 
 async function Dashboard() {
-    const data = await serverFetch('/api/industry/insight', { queryParams: { industry: "software engineer" } });
+    const { userId } = await auth();
+    const data = await serverFetch('/industry/insight', { queryParams: { clerkUserId: userId! }, cache: 'no-cache' });
     let industryInsight = {
         salaryRanges: [
             {
@@ -23,24 +26,24 @@ async function Dashboard() {
         topSkills: [],
         marketOutlook: "",
         keyTrends: [],
-        recommendedSkills: []
+        recommendedSkills: [],
+        lastUpdated: ""
     }
 
-    if (data.success) {
+    if (data.success && data.data) {
         industryInsight = data.data
     }
 
     return (
         <div className='py-24 p-2'>
             <h2 className='text-6xl font-bold gradient-title'>Industry Insights</h2>
-            <Badge variant={'outline'} className='p-2'>Last updated: 20/10/2025</Badge>
+            <Badge variant={'outline'} className='p-2'>Last updated: {formatDateToDDMMYYYY(industryInsight?.lastUpdated)}</Badge>
             <Insights industryInsight={industryInsight} />
-            <Chart salaryRanges={industryInsight.salaryRanges} />
+            <Chart salaryRanges={industryInsight?.salaryRanges} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Trends trends={industryInsight.keyTrends} />
-                <RecommendedSkills recommendedSkills={industryInsight.recommendedSkills} />
+                <Trends trends={industryInsight?.keyTrends} />
+                <RecommendedSkills recommendedSkills={industryInsight?.recommendedSkills} />
             </div>
-
         </div>
     )
 }

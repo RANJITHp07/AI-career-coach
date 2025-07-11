@@ -15,7 +15,7 @@ type Props = {
 
 function Insights({ industryInsight }: Props) {
     const marketOutlookIcon = () => {
-        switch (industryInsight.marketOutlook) {
+        switch (industryInsight?.marketOutlook) {
             case "Positive":
                 return <TrendingUp className='h-4 w-4 text-green-500' />;
             case "Negative":
@@ -26,7 +26,7 @@ function Insights({ industryInsight }: Props) {
     };
 
     const getDemandLevelColor = () => {
-        switch (industryInsight.demandLevel.toLowerCase()) {
+        switch (industryInsight?.demandLevel?.toLowerCase()) {
             case "high":
                 return "bg-green-500";
             case "medium":
@@ -47,7 +47,7 @@ function Insights({ industryInsight }: Props) {
                         {marketOutlookIcon()}
                     </div>
 
-                    <h3 className='font-bold text-2xl'>{industryInsight.marketOutlook}</h3>
+                    <h3 className='font-bold text-2xl'>{industryInsight?.marketOutlook}</h3>
                     <p className='text-muted-foreground text-xs'>Next update in 4 days</p>
                 </CardContent>
             </Card>
@@ -57,8 +57,8 @@ function Insights({ industryInsight }: Props) {
                         <p className='text-sm'>Industry Growth</p>
                         <TrendingUp className='h-4 w-4 text-green-500' />
                     </div>
-                    <h3 className='font-bold text-2xl mb-1'>{industryInsight.growthRate}%</h3>
-                    <Progress value={industryInsight.growthRate} />
+                    <h3 className='font-bold text-2xl mb-1'>{industryInsight?.growthRate}%</h3>
+                    <Progress value={industryInsight?.growthRate} />
                 </CardContent>
             </Card>
             <Card className='bg-transparent'>
@@ -67,7 +67,7 @@ function Insights({ industryInsight }: Props) {
                         <p className='text-sm'>Demand Level</p>
                         <Luggage className='h-4 w-4 text-muted-foreground' />
                     </div>
-                    <h3 className='font-bold text-2xl mb-1'>{industryInsight.demandLevel}</h3>
+                    <h3 className='font-bold text-2xl mb-1'>{industryInsight?.demandLevel}</h3>
                     <Progress
                         value={100}
                         className={twMerge(
@@ -86,7 +86,7 @@ function Insights({ industryInsight }: Props) {
 
                     <div className="gap-2 flex flex-wrap">
                         {
-                            industryInsight.topSkills.map((skill) => {
+                            industryInsight?.topSkills?.map((skill) => {
                                 return <Badge key={skill} variant="secondary">{skill}</Badge>
                             })
                         }
