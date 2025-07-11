@@ -12,10 +12,12 @@ export class IndustryController {
 
     async industryInsight(req: Request, res: Response, next: NextFunction) {
         try {
-            const industry = req.query.industry as string
-            const industryInsight = await this.industryService.industryInsight(industry)
+            const clerkUserId = req.query.clerkUserId as string
+            console.log(clerkUserId)
+            const industryInsight = await this.industryService.fetchIndustryInsight(clerkUserId)
             res.status(200).json(successResponse("Industry insight data fetched successfully", industryInsight))
         } catch (error) {
+            console.log(error)
             next()
         }
     }

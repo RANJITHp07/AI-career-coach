@@ -9,6 +9,21 @@ export class IndustryService {
 
     async industryInsight(industry: string) {
         const industryInsight = await generate(industryInsightPrompt(industry))
+        return industryInsight
+    }
+
+    async fetchIndustryInsight(clerkUserId: string) {
+
+        const industryInsight = await prisma.industryInsight.findFirst({
+            where: {
+                users: {
+                    some: {
+                        clerkUserId: clerkUserId,
+                    },
+                },
+            },
+        });
+
 
         return industryInsight
     }

@@ -16,6 +16,7 @@ model User {
   signInMethod    SignInMethod
   imageUrl        String?
   industry        String?
+  specialization  String?
   industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
