@@ -4,6 +4,7 @@ import React from 'react'
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { TQuizQuestion } from '@/types/quiz'
+import { useQuizStore } from '@/store/quizStore'
 
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
     index: number
 }
 function Question({ question, index }: Props) {
+    const { setUserSelectedAnswers } = useQuizStore()
     return (
         <Card className='my-5 bg-transparent'>
             <CardHeader>
@@ -18,9 +20,9 @@ function Question({ question, index }: Props) {
             </CardHeader>
             <CardContent>
                 <p className='text-sm'>{question.question}</p>
-                <RadioGroup className='my-3'>
+                <RadioGroup className='my-3' onValueChange={(value) => setUserSelectedAnswers(value, index - 1)}>
                     {
-                        question.options.map((option) => {
+                        question.options.map((option, index) => {
                             return (
                                 <div className="flex items-center space-x-2">
                                     <RadioGroupItem value={option} id={option} />

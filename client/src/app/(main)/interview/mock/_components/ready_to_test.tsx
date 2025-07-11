@@ -2,14 +2,16 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { serverFetch } from '@/lib/fetcher'
 import { useQuizStore } from '@/store/quizStore'
+import { useUser } from '@clerk/nextjs'
 import React from 'react'
 
 function ReadyToTest() {
+    const { user } = useUser();
     const { setLoading, setQuizData } = useQuizStore()
 
     const handleStartQuiz = async () => {
         setLoading(true)
-        const data = await serverFetch('/api/quiz', { cache: 'no-store' });
+        const data = await serverFetch('/quiz', { cache: 'no-store', queryParams: { userId: user?.id! } });
 
         if (data.success) {
             setQuizData(data.data)
