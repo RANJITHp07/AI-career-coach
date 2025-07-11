@@ -19,4 +19,16 @@ export class UserController {
     }
 
 
+    async completeProfile(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { clerkUserId, ...rest } = req.body
+            const user = await this.userService.completeProfile(clerkUserId, rest);
+            res.status(200).json(successResponse("User data updated successfully", user))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
+
 }
