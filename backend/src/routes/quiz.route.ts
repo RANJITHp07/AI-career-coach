@@ -7,5 +7,8 @@ const quizService = new QuizService()
 const quizController = new QuizController(quizService);
 
 router.get("/", (req, res, next) => quizController.createQuiz(req, res, next));
+router.post("/", (req, res, next) => quizController.submitQuiz(req, res, next));
+router.get("/stats", (req, res, next) => quizController.getQuizStats(req, res, next));
+
 
 export default router;
