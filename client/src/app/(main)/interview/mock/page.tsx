@@ -16,6 +16,8 @@ function MockInterview() {
     const { user } = useUser();
     const { quizVisible, loading, quizData, userSelectedAnswers, setisSubmitted, isSubmitted, setResult, result } = useQuizStore()
 
+    console.log(quizData.questions)
+
     const handleQuizSubmit = async () => {
         setisSubmitted(true)
         const data = await serverFetch('/quiz', {
@@ -44,7 +46,7 @@ function MockInterview() {
         <div className='py-24 p-2'>
             <div className='flex flex-row gap-1 items-center mb-4 cursor-pointer'>
                 <ArrowLeft className='h-3 w-3' />
-                <Link href="/interview" className='text-xs'>Back to Interview preparation</Link>
+                <Link href="/interview" className='text-xs hover:underline'>Back to Interview preparation</Link>
             </div>
             <h2 className='text-6xl font-bold gradient-title'>Mock Interview</h2>
             <p className='text-sm text-muted-foreground'>Test you knownledge with industry-specific knownledge</p>

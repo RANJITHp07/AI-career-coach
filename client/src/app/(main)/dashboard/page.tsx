@@ -7,6 +7,7 @@ import RecommendedSkills from './_components/recommended_skills'
 import { serverFetch } from '@/lib/fetcher'
 import { auth } from '@clerk/nextjs/server'
 import { formatDateToDDMMYYYY } from '@core/utils'
+import { redirect } from 'next/navigation'
 
 async function Dashboard() {
     const { userId } = await auth();
@@ -32,6 +33,8 @@ async function Dashboard() {
 
     if (data.success && data.data) {
         industryInsight = data.data
+    } else {
+        redirect("/onboarding")
     }
 
     return (

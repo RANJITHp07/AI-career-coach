@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import CoverLetterForm from './_components/cover-letter-form'
 
 function CreateCoverLetter() {
 
@@ -13,7 +14,8 @@ function CreateCoverLetter() {
                 <Link href="/interview" className='text-xs'>Back to Interview preparation</Link>
             </div>
             <h2 className='text-6xl font-bold gradient-title'>Create Cover Letter</h2>
-            <p className='text-sm text-muted-foreground'>Generate a tailored cover letter for you application</p>
+            <p className='text-sm text-muted-foreground mb-5'>Generate a tailored cover letter for you application</p>
+            <CoverLetterForm />
         </div>
     )
 }

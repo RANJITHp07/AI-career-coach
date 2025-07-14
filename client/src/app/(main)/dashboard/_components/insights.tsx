@@ -39,7 +39,7 @@ function Insights({ industryInsight }: Props) {
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-5 md:my-12">
             <Card className='bg-transparent'>
                 <CardContent className='bg-transparent'>
                     <div className='mb-3 flex flex-row justify-between items-center'>
