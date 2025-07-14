@@ -101,7 +101,6 @@ export class QuizService {
                 }
             }),
         ]);
-
         return {
             averageScore: averageData._avg.quizScore || 0,
             latestScore: latestAssessment?.quizScore || 0,
@@ -116,8 +115,43 @@ export class QuizService {
                     clerkUserId: userId
                 }
             },
-            skip: (page - 1) * 10,
-            take: 10
+            select: {
+                improvementTip: true,
+                createdAt: true,
+                quizScore: true
+            },
+            skip: (page - 1) * 20,
+            take: 20
         })
+    }
+
+    async getAnalysis(userId: string) {
+        const results = await prisma.assessment.findMany({
+            where: {
+                user: {
+                    clerkUserId: userId
+                }
+            },
+            select: {
+                createdAt: true,
+                quizScore: true
+            },
+            take: 20
+        });
+
+        const formatted = results.map(item => {
+            const date = item.createdAt;
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+
+            return {
+                date: `${day}-${month}-${year}`,
+                score: item.quizScore * 10
+            };
+        });
+
+        return formatted
+
     }
 }

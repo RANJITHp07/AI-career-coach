@@ -54,4 +54,15 @@ export class QuizController {
         }
     }
 
+    async getAnalysis(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userId } = req.query
+            const quiz = await this.quizService.getAnalysis(userId as string)
+            res.status(200).json(successResponse("Quiz anaylsis fetched successfully", quiz))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
 }
