@@ -39,14 +39,16 @@ function Header() {
                                 <Button className='hidden bg-white text-background md:flex'> <Sparkles />Growth Tool <ChevronDown /></Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-40 mt-1" align='start'>
-                                <Link href={'/'}>
+                                <Link href={'/resume'}>
                                     <DropdownMenuItem className='flex flex-row gap-1 text-sm items-center cursor-pointer'>
                                         <FileText className='w-4 h-4' />Build Resume
                                     </DropdownMenuItem>
                                 </Link>
-                                <DropdownMenuItem className='flex flex-row gap-1 my-2 text-sm items-center cursor-pointer'>
-                                    <SquarePen className='w-4 h-4' />Cover Letter
-                                </DropdownMenuItem>
+                                <Link href={'/cover-letter'}>
+                                    <DropdownMenuItem className='flex flex-row gap-1 my-2 text-sm items-center cursor-pointer'>
+                                        <SquarePen className='w-4 h-4' />Cover Letter
+                                    </DropdownMenuItem>
+                                </Link>
                                 <Link href={'/interview'}>
                                     <DropdownMenuItem className='flex flex-row gap-1 text-sm items-center cursor-pointer'>
                                         <BookX className='w-4 h-4' />Interview Prep
