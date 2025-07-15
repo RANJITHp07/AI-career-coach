@@ -88,3 +88,33 @@ Keep the response under 2 sentences and make it encouraging.
   return prompt;
 }
 
+
+type PromptOptions = {
+  type: 'experience' | 'project' | 'education';
+  current: string;
+  industry: string;
+
+};
+
+export function generateResumeImprovementPrompt({ type, current, industry }: PromptOptions): string {
+  const prompt = `
+As an expert resume writer, improve the following ${type} description for a ${industry} professional.
+Make it more impactful, quantifiable, and aligned with industry standards.
+Current content: "${current}"
+
+Requirements:
+1. Use action verbs
+2. Include metrics and results where possible
+3. Highlight relevant technical skills
+4. Keep it concise but detailed
+5. Focus on achievements over responsibilities
+6. Use industry-specific keywords
+
+Format the response strictly as JSON like this:
+{ "rephrased": "your improved version here" }
+Only return the JSON object with no other explanation.
+`;
+
+  return prompt.trim();
+}
+
