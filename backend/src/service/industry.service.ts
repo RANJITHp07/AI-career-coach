@@ -2,7 +2,7 @@ import * as argon2 from "argon2";
 import prisma from "../../prisma/seed";
 import { CreateUserSchema, TCreateUserInput } from "@core/validators"
 import { generate } from "src/config/geminiAI";
-import { industryInsightPrompt } from "@core/utils";
+import { generateResumeImprovementPrompt, industryInsightPrompt } from "@core/utils";
 
 
 export class IndustryService {
@@ -26,6 +26,16 @@ export class IndustryService {
 
 
         return industryInsight
+    }
+
+    async resumeImprovementPrompts(userId: string, type: "experience" | "project" | "education", description: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                clerkUserId: userId
+            }
+        })
+
+        return await generate(generateResumeImprovementPrompt({ type, current: description, industry: user?.industry! }))
     }
 
 }

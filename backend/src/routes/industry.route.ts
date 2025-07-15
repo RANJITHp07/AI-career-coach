@@ -7,5 +7,7 @@ const industryService = new IndustryService()
 const industryController = new IndustryController(industryService);
 
 router.get("/insight", (req, res, next) => industryController.industryInsight(req, res, next));
+router.get("/improvement", (req, res, next) => industryController.resumeImprovement(req, res, next));
+
 
 export default router;

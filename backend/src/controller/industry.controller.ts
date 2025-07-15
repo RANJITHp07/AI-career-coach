@@ -13,9 +13,20 @@ export class IndustryController {
     async industryInsight(req: Request, res: Response, next: NextFunction) {
         try {
             const clerkUserId = req.query.clerkUserId as string
-            console.log(clerkUserId)
             const industryInsight = await this.industryService.fetchIndustryInsight(clerkUserId)
             res.status(200).json(successResponse("Industry insight data fetched successfully", industryInsight))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
+    async resumeImprovement(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userId, description, type } = req.query
+            console.log(req.query)
+            const industryInsight = await this.industryService.resumeImprovementPrompts(userId as string, type as "experience" | "project" | "education", description as string)
+            res.status(200).json(successResponse("Description rephashing completed successfully", industryInsight))
         } catch (error) {
             console.log(error)
             next()
