@@ -23,10 +23,12 @@ function CoverLetterForm() {
     return (
         <div>
             <Card className='bg-transparent p-6'>
-                <CardTitle>Job Details</CardTitle>
-                <CardDescription>
-                    Provide information about the position you're applying for
-                </CardDescription>
+                <CardHeader>
+                    <CardTitle>Job Details</CardTitle>
+                    <CardDescription>
+                        Provide information about the position you're applying for
+                    </CardDescription>
+                </CardHeader>
                 <CardContent className='bg-transparent'>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">

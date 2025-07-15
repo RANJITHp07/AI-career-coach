@@ -15,9 +15,11 @@ export default function Error({
     }, [error])
 
     return (
-        <div className='my-24'>
-            <h2 className='text-3xl md:text-4xl font-bold gradient-title'>Something went wrong!</h2>
-            <Button>
+        <div className="flex flex-col items-center justify-center min-h-screen px-4">
+            <div className='my-5'>
+                <h2 className='text-3xl md:text-4xl font-bold gradient-title'>Something went wrong!</h2>
+            </div>
+            <Button onClick={() => window.location.reload()}>
                 Try again
             </Button>
         </div>
