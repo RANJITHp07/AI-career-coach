@@ -22,7 +22,7 @@ export async function serverFetch<T>(
         revalidate,
     }: FetchOptions = {}
 ): Promise<any> {
-    const baseUrl = process.env.API_URL || 'http://localhost:5000/api'
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
 
     const queryString = queryParams
         ? '?' +
