@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { experienceSchema } from './experience'
 
 export const profileSchema = z.object({
     professionalSummary: z
