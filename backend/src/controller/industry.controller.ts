@@ -33,5 +33,48 @@ export class IndustryController {
         }
     }
 
+    async generateCoverLetter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userId, data } = req.body
+            const industryInsight = await this.industryService.generateCoverLetter(userId as string, data as any)
+            res.status(200).json(successResponse("Description rephashing completed successfully", industryInsight))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
+    async fetchCoverLetter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { clerkUserId } = req.query
+            const industryInsight = await this.industryService.fetchCoverLetter(clerkUserId! as string)
+            res.status(200).json(successResponse("Fetched all cover letters", industryInsight))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
+    async fetchOneCoverLetter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params
+            const industryInsight = await this.industryService.fetchOneCoverLetter(id! as string)
+            res.status(200).json(successResponse("Fetched the cover letter", industryInsight))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
+
+    async deleteCoverLetter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params
+            const industryInsight = await this.industryService.deleteCoverLetter(id! as string)
+            res.status(200).json(successResponse("Fetched the cover letter", industryInsight))
+        } catch (error) {
+            console.log(error)
+            next()
+        }
+    }
 
 }

@@ -1,8 +1,6 @@
-import * as argon2 from "argon2";
 import prisma from "../../prisma/seed";
-import { CreateUserSchema, TCreateUserInput } from "@core/validators"
 import { generate } from "src/config/geminiAI";
-import { generateResumeImprovementPrompt, industryInsightPrompt } from "@core/utils";
+import { generateCoverLetterPrompt, generateResumeImprovementPrompt, industryInsightPrompt } from "@core/utils";
 
 
 export class IndustryService {
@@ -34,8 +32,78 @@ export class IndustryService {
                 clerkUserId: userId
             }
         })
-
         return await generate(generateResumeImprovementPrompt({ type, current: description, industry: user?.industry! }))
+    }
+
+    async generateCoverLetter(userId: string, data: {
+        jobTitle: string,
+        companyName: string,
+        jobDescription: string
+    }) {
+        const user = await prisma.user.findUnique({
+            where: {
+                clerkUserId: userId
+            }
+        })
+
+        const { coverLetter } = await generate(generateCoverLetterPrompt(data, user))
+
+        await prisma.coverLetter.create({
+            data: {
+                jobTitle: data.jobTitle,
+                jobDescription: data.jobDescription,
+                companyName: data.companyName,
+                userId: user?.id!,
+                content: coverLetter
+            }
+        });
+
+        return coverLetter
+    }
+
+    async fetchCoverLetter(clerkUserId: string) {
+        return await prisma.coverLetter.findMany({
+            where: {
+                user: {
+                    clerkUserId
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
+            select: {
+                id: true,
+                jobDescription: true,
+                jobTitle: true,
+                content: true,
+                companyName: true,
+                createdAt: true
+            }
+        })
+    }
+
+    async fetchOneCoverLetter(id: string) {
+        return await prisma.coverLetter.findUnique({
+            where: {
+                id,
+            },
+            select: {
+                id: true,
+                jobDescription: true,
+                jobTitle: true,
+                content: true,
+                companyName: true,
+                createdAt: true
+            }
+        })
+    }
+
+    async deleteCoverLetter(id: string) {
+        return await prisma.coverLetter.delete({
+            where: {
+                id,
+            }
+        })
     }
 
 }

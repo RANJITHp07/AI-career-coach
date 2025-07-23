@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import dotenv from "dotenv"
 import morgan from 'morgan';
 import appRouter from './routes';
@@ -33,6 +33,16 @@ app.get('/health', (req, res) => {
 
 //routes
 app.use("/api", appRouter)
+
+
+//global error handler
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error('❌ Error:', err.stack || err);
+    res.status(500).json({
+        success: false,
+        message: err.message || 'Internal Server Error',
+    });
+});
 
 app.listen(PORT, () => {
     return console.log(`Express is listening at http://localhost:${PORT}`);
