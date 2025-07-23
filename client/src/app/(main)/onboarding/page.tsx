@@ -7,10 +7,11 @@ import OnboardingForm from './_components/onboarding_form'
 import { auth } from '@clerk/nextjs/server';
 import { serverFetch } from '@/lib/fetcher';
 import { redirect } from 'next/navigation';
+import { apis } from '@/lib/constant/api';
 
 async function OnBoarding() {
     const { userId } = await auth();
-    const data = await serverFetch('/industry/insight', { queryParams: { clerkUserId: userId! }, cache: 'no-cache' });
+    const data = await serverFetch(apis.insight, { queryParams: { clerkUserId: userId! }, cache: 'no-cache' });
 
     if (data.success && data?.data) {
         redirect("/dashboard")

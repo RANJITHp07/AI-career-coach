@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import Link from 'next/link';
 
 function HeroSection() {
     const imageRef = useRef<HTMLDivElement>(null);
@@ -30,8 +31,10 @@ function HeroSection() {
             </h1>
             <p className='text-muted-foreground text-lg md:text-xl max-w-[600px] mx-auto'>Advance your career with personalized guidance,interview prep and AI-powered tools for job success</p>
             <div className='flex flex-row gap-2 justify-center my-4'>
-                <Button size={'lg'}>Get Started</Button>
-                <Button variant="outline" size={'lg'}>Watch Demo</Button>
+                <Link href="/sign-up">
+                    <Button size={'lg'}>Get Started</Button>
+                </Link>
+                {/* <Button variant="outline" size={'lg'}>Watch Demo</Button> */}
             </div>
             <div ref={imageRef} className='flex flex-row justify-center perspective-1000 md:my-12'>
                 <Image

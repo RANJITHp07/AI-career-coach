@@ -4,20 +4,21 @@ import Chart from './_components/chart'
 import QuizList from './_components/quiz-list'
 import { auth } from '@clerk/nextjs/server';
 import { serverFetch } from '@/lib/fetcher';
+import { apis } from '@/lib/constant/api';
 
 async function InterviewPreparation() {
     const { userId } = await auth();
 
     const [quizStatsRes, quizListRes, quizAnalysisRes] = await Promise.all([
-        serverFetch('/quiz/stats', {
+        serverFetch(apis.stats, {
             queryParams: { clerkUserId: userId! },
             cache: 'no-cache'
         }),
-        serverFetch('/quiz/history', {
+        serverFetch(apis.history, {
             queryParams: { userId: userId!, page: 1 },
             cache: 'no-cache'
         }),
-        serverFetch('/quiz/analysis', {
+        serverFetch(apis.analysis, {
             queryParams: { userId: userId! },
             cache: 'no-cache'
         }),

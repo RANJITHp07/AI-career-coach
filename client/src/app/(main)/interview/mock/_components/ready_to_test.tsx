@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { apis } from '@/lib/constant/api'
 import { serverFetch } from '@/lib/fetcher'
 import { useQuizStore } from '@/store/quizStore'
 import { useUser } from '@clerk/nextjs'
@@ -11,7 +12,7 @@ function ReadyToTest() {
 
     const handleStartQuiz = async () => {
         setLoading(true)
-        const data = await serverFetch('/quiz', { cache: 'no-store', queryParams: { userId: user?.id! } });
+        const data = await serverFetch(apis.createQuiz, { cache: 'no-store', queryParams: { userId: user?.id! } });
 
         if (data.success) {
             setQuizData(data.data)

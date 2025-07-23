@@ -11,16 +11,15 @@ import { useUser } from '@clerk/nextjs'
 import { serverFetch } from '@/lib/fetcher'
 import { useRouter } from 'next/navigation'
 import QuizReview from './_components/quiz-review'
+import { apis } from '@/lib/constant/api'
 
 function MockInterview() {
     const { user } = useUser();
     const { quizVisible, loading, quizData, userSelectedAnswers, setisSubmitted, isSubmitted, setResult, result } = useQuizStore()
 
-    console.log(quizData.questions)
-
     const handleQuizSubmit = async () => {
         setisSubmitted(true)
-        const data = await serverFetch('/quiz', {
+        const data = await serverFetch(apis.createQuiz, {
             method: 'POST', body: {
                 userId: user?.id,
                 submittedAnswers: userSelectedAnswers,

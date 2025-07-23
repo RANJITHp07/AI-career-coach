@@ -8,10 +8,11 @@ import { serverFetch } from '@/lib/fetcher'
 import { auth } from '@clerk/nextjs/server'
 import { formatDateToDDMMYYYY } from '@core/utils'
 import { redirect } from 'next/navigation'
+import { apis } from '@/lib/constant/api'
 
 async function Dashboard() {
     const { userId } = await auth();
-    const data = await serverFetch('/industry/insight', { queryParams: { clerkUserId: userId! }, cache: 'no-cache' });
+    const data = await serverFetch(apis.insight, { queryParams: { clerkUserId: userId! }, cache: 'no-cache' });
     let industryInsight = {
         salaryRanges: [
             {

@@ -118,3 +118,36 @@ Only return the JSON object with no other explanation.
   return prompt.trim();
 }
 
+export function generateCoverLetterPrompt(data: any, user: any) {
+  return `
+Write a professional cover letter for a ${data.jobTitle} position at ${data.companyName}.
+
+About the candidate:
+- Industry: ${user.industry}
+- Years of Experience: ${user.experience}
+- Skills: ${user.skills?.join(", ")}
+- Professional Background: ${user.bio}
+
+Job Description:
+${data.jobDescription}
+
+Requirements:
+1. Use a professional, enthusiastic tone
+2. Highlight relevant skills and experience
+3. Show understanding of the company's needs
+4. Keep it concise (max 400 words)
+5. Use proper business letter formatting in markdown
+6. Include specific examples of achievements
+7. Relate candidate's background to job requirements
+
+**Return your response strictly as a JSON object in this format:**
+{ "coverLetter": "markdown-formatted cover letter here" }
+
+**Do not include any explanation, extra text, or markdown code block syntax.**
+  `.trim();
+}
+
+
+
+
+
