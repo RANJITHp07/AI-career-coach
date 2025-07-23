@@ -26,7 +26,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=${TARGET:-production}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://ai-career-coach_owner:npg_Sf9UEqmHkl4M@ep-twilight-math-a8rwogh7-pooler.eastus2.azure.neon.tech/ai-career-coach?sslmode=require}
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - db
     profiles:
