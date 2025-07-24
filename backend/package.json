@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js",
     "dev": "npx ts-node-dev --project tsconfig.json -r tsconfig-paths/register src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prebuild": "npm run build:packages && npx prisma generate",
+    "build:packages": "npm run build:utils && npm run build:validator",
+    "build:utils": "cd ../packages/utils && npm i && npm run build",
+    "build:validator": "cd ../packages/validator && npm i &&  npm run build"
   },
   "keywords": [],
   "author": "",
