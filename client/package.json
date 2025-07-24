@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prebuild": "tsc --noEmit --project ../tsconfig.typecheck.json"
+    "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.23.0",

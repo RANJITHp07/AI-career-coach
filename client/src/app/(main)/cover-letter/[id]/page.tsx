@@ -6,15 +6,10 @@ import Link from 'next/link'
 import React from 'react'
 import Markdown from './_components/markdown';
 
+type Params = Promise<{ id: string }>
 
-
-type PageProps = {
-    params: {
-        id: string;
-    };
-};
-
-async function page({ params }: PageProps) {
+async function Page(props: { params: Params }) {
+    const params = await props.params;
     const { id } = params;
 
     const { data = {} } = await serverFetch(
@@ -36,4 +31,4 @@ async function page({ params }: PageProps) {
     )
 }
 
-export default page
+export default Page
