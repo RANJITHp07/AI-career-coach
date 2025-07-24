@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/app.js",
+    "start": "npm run build && node -r tsconfig-paths/register dist/backend/src/app.js",
     "dev": "npx ts-node-dev --project tsconfig.json -r tsconfig-paths/register src/app.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "prebuild": "npm run build:packages && npx prisma generate",
     "build:packages": "npm run build:utils && npm run build:validator",
     "build:utils": "cd ../packages/utils && npm i && npm run build",
@@ -22,6 +22,7 @@
     "nodemon": "^3.1.10",
     "prisma": "^6.10.1",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.8.3"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "dotenv": "^16.5.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "zod": "^4.0.8"
   }
 }

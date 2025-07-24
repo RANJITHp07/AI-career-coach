@@ -1,5 +1,5 @@
 import { generateImprovementPrompt, skillQuizPrompt, WrongAnswer } from "@core/utils";
-import prisma from "prisma/seed";
+import prisma from "../../prisma/seed";
 import { generate } from "src/config/geminiAI";
 import { TQuizQuestion } from "src/lib/@types/quiz";
 
