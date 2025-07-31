@@ -31,36 +31,47 @@ export class UserService {
     }
 
     async completeProfile(clerkUserId: string, data: TUserProfile) {
-        const { bio, industry, experience, skills, specialization } = data
-        const industryInsight = await this.industryService.industryInsight(industry)
+        const { bio, industry, experience, skills, specialization } = data;
+
+        const skillsArray = skills.split(',');
+        const industryKey = `${industry}-${specialization}`;
+        const nextUpdate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+        const insightData = await this.industryService.industryInsight(industry);
+
+        const upsertedInsight = await prisma.industryInsight.upsert({
+            where: {
+                industry: industryKey,
+            },
+            create: {
+                ...insightData,
+                industry: industryKey,
+                nextUpdate,
+            },
+            update: {
+                ...insightData,
+                nextUpdate,
+            },
+        });
+
         return await prisma.user.update({
             where: {
                 clerkUserId,
             },
             data: {
-                bio: bio,
+                bio,
                 experience: parseInt(experience),
-                skills: skills.split(','),
+                skills: skillsArray,
                 specialization,
+                industry: industryKey,
                 industryInsight: {
-                    upsert: {
-                        where: {
-                            industry: `${industry}-${specialization}`,
-                        },
-                        create: {
-                            ...industryInsight,
-                            industry: `${industry}-${specialization}`,
-                            nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-                        },
-                        update: {
-                            ...industryInsight,
-                            nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-                        },
+                    connect: {
+                        id: upsertedInsight.id,
                     },
                 },
-            }
-
-        })
+            },
+        });
     }
+
 
 }

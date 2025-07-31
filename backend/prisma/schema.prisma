@@ -8,18 +8,19 @@ datasource db {
 }
 
 model User {
-  id              String           @id @default(uuid())
-  clerkUserId     String           @unique
-  email           String           @unique
-  name            String?
-  password        String?
-  signInMethod    SignInMethod
-  imageUrl        String?
-  industry        String?
-  specialization  String?
-  industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  id                String           @id @default(uuid())
+  clerkUserId       String           @unique
+  email             String           @unique
+  name              String?
+  password          String?
+  signInMethod      SignInMethod
+  imageUrl          String?
+  industry          String?
+  specialization    String?
+  industryInsightId String? // FK
+  industryInsight   IndustryInsight? @relation(fields: [industryInsightId], references: [id])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 
   bio        String?
   experience Int?
