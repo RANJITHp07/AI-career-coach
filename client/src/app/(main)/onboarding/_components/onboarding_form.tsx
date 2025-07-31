@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Select,
     SelectContent,
@@ -38,19 +38,28 @@ function OnboardingForm() {
         resolver: zodResolver(OnBoardingSchema),
     })
 
+    const [loading, setLoading] = useState(false)
+
     const selectedIndustry = form.watch("industry");
 
     async function onSubmit(data: z.infer<typeof OnBoardingSchema>) {
-        const res = await serverFetch(apis.profile, {
-            body: {
-                clerkUserId: user?.id,
-                ...data
-            },
-            method: 'PUT',
-        });
+        try {
+            setLoading(true)
+            const res = await serverFetch(apis.profile, {
+                body: {
+                    clerkUserId: user?.id,
+                    ...data
+                },
+                method: 'PUT',
+            });
 
-        if (res.success) {
-            router.push('/dashboard')
+            if (res.success) {
+                router.push('/dashboard')
+            }
+        } catch (error) {
+
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -168,7 +177,7 @@ function OnboardingForm() {
                         </FormItem>
                     )}
                 />
-                <Button className='w-full p-5' type="submit">Complete Profile</Button>
+                <Button className='w-full p-5' type="submit" disabled={loading}>{loading ? "Processing..." : "Complete Profile"}</Button>
             </form>
         </Form>
     )
