@@ -49,14 +49,4 @@ Allows users to maintain a detailed professional profile, including:
 - Docker for containerized builds and deployments
 - Shell scripts for setup, build, and environment automation
 
-## Project Structure
-
-.
-├── client/ # Next.js client application
-├── backend/ # Express backend and business logic
-├── packages/ # packages
-├── docker/ # Dockerfiles and configurations
-├── scripts/ # Shell scripts for automation
-└── README.md # Project documentation
-
 
